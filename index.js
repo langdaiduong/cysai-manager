@@ -6,8 +6,6 @@ const bodyParser= require('body-parser');
 const initAPIs = require("./src/routes/api");
 var cors = require('cors')
 
-app.use(cors())
-
 // Make sure you place body-parser before your CRUD handlers!
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -41,7 +39,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-
+app.use(cors())
+app.all('*', (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "https://localhost:3000");
+    next();
+});
 
 var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
 var server_host = process.env.YOUR_HOST || '0.0.0.0';
