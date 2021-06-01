@@ -40,9 +40,12 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 app.use(cors())
-app.all('*', (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "https://localhost:3000");
-    next();
+app.use((req, res, next) => {
+res.header('Access-Control-Allow-Origin', '*');
+res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With,Content-Type, Accept, Access-Control-Allow-Request-Method');
+res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+next();
 });
 
 var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
