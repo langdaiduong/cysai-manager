@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Backend source code for YouTube Fastify + React admin playlist",
   "main": "index.js",
+  "engines": {
+    "node": "12.18.3"
+  },
   "scripts": {
     "dev": "nodemon server"
   },
