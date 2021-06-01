@@ -4,6 +4,9 @@ const express = require('express');
 const app = express();
 const bodyParser= require('body-parser');
 const initAPIs = require("./src/routes/api");
+var cors = require('cors')
+
+app.use(cors())
 
 // Make sure you place body-parser before your CRUD handlers!
 app.use(bodyParser.json());
