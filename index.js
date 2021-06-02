@@ -41,10 +41,10 @@ app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "http://cysai-employees-manager.herokuapp.com"); // update to match the domain you will make the request from
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
+app.use((req, res, next) => {
+res.setHeader('Access-Control-Allow-Origin', '*');
+res.setHeader('Access-Control-Allow-Headers','Origin, X-Requested-With, Content-Type,Accept, Authortization');  
+res.setHeader('Acces-Control-Allow-Methods','GET, POST, PATCH, DELETE');
 });
 
 var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
