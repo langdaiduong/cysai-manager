@@ -9,6 +9,7 @@
   "scripts": {
     "start": "nodemon index.js"
   },
+  "proxy" : "http://cysai-employees-manager.herokuapp.com",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/LanciWeb/fastify-notes-backend.git"

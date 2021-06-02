@@ -4,7 +4,8 @@ const express = require('express');
 const app = express();
 const bodyParser= require('body-parser');
 const initAPIs = require("./src/routes/api");
-var cors = require('cors')
+var cors = require('cors');
+
 
 // Make sure you place body-parser before your CRUD handlers!
 app.use(bodyParser.json());
@@ -39,13 +40,11 @@ app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
-app.use(cors())
-app.use((req, res, next) => {
-res.header('Access-Control-Allow-Origin', '*');
-res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With,Content-Type, Accept, Access-Control-Allow-Request-Method');
-res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
-res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
-next();
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "http://cysai-employees-manager.herokuapp.com"); // update to match the domain you will make the request from
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
 });
 
 var server_port = process.env.YOUR_PORT || process.env.PORT || 3000;
