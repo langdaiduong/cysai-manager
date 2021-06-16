@@ -4,8 +4,7 @@ const express = require('express');
 const app = express();
 const bodyParser= require('body-parser');
 const initAPIs = require("./src/routes/api");
-var cors = require('cors');
-
+const  cors = require('cors'); 
 
 // Make sure you place body-parser before your CRUD handlers!
 app.use(bodyParser.json());
@@ -26,16 +25,11 @@ try {
   console.error(e);
 }
 
-// app.addHook('preHandler', ContentRangeHook);
+app.use(cors());
+initAPIs(app);
 
 app.use(express.json());
-
-// employeeRoutes(app);
-// userRoutes(app);
-// salaryRoutes(app);
-
-initAPIs(app);
-// lien ket voi frontend
+//lien ket voi frontend
 app.use(express.static(path.join(__dirname, 'build')));
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
